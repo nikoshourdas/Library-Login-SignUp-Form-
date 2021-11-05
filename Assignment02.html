@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+        <link rel="stylesheet" href="/resources/demos/style.css">  
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <style>
+        
+            /* Style the container for inputs */
+            .container {
+                background-color: #f1f1f1;
+                padding: 20px;
+            }
+
+            #message {
+                display:none;
+                background: #f1f1f1;
+                color: #000;
+                position: relative;
+                padding: 20px;
+                margin-top: 10px;
+            }
+
+            #message p {
+                padding: 10px 35px;
+                font-size: 18px;
+            }
+
+            /* Add a green text color and a checkmark when the requirements are right */
+            .valid {
+                color: green;
+            }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                content: "✔";
+            }
+
+            /* Add a red text color and an "x" when the requirements are wrong */
+            .invalid {
+                color: red;
+            }
+
+            .invalid:before {
+                position: relative;
+                left: -35px;
+                content: "✖";
+            }
+
+
+            body {font-family: Arial, Helvetica, sans-serif;}
+            form {border: 3px solid #f1f1f1; width: 50 ; height: 400;}
+            input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+            }
+
+            button {
+                background-color: #218fd8;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+            button:hover {
+                opacity: 0.8;
+            }
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+                .cancelbtn {
+                    width: 100%;
+                }
+            }
+        </style>
+
+        <!-- password validation -->
+        <script> 
+            var myInput = document.getElementById("psw");
+            var letter = document.getElementById("letter");
+            var capital = document.getElementById("capital");
+            var number = document.getElementById("number");
+            var length = document.getElementById("length");
+            
+            // When the user clicks on the password field, show the message box
+            myInput.onfocus = function() {
+              document.getElementById("message").style.display = "block";
+            }
+            
+            // When the user clicks outside of the password field, hide the message box
+            myInput.onblur = function() {
+              document.getElementById("message").style.display = "none";
+            }
+            
+            // When the user starts to type something inside the password field
+            myInput.onkeyup = function() {
+              // Validate lowercase letters
+              var lowerCaseLetters = /[a-z]/g;
+              if(myInput.value.match(lowerCaseLetters)) {
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+              } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+            }
+            
+              // Validate capital letters
+              var upperCaseLetters = /[A-Z]/g;
+              if(myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+              } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+              }
+            
+              // Validate numbers
+              var numbers = /[0-9]/g;
+              if(myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+              } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+              }
+            
+              // Validate length
+              if(myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+              } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+              }
+            }
+        </script>
+
+        <!-- autocomplete Function  -->
+        <script>
+            $(function(){
+                var AvailableTags = [
+                                "Greece" , "USA" ,"England" ,"Finland",
+                                "France" , "Italy", "Netherlands","Costa Rica",
+                                "Cyprus","Scotland","Czech Republic","Egypt",
+                                "Denmark", "Germany" , "Austria", "Estonia"
+                                ] ; 
+
+                var Availablecities = [
+                                    "Athens", "New York", "London","Helsinki",
+                                    "Paris", "Rome", "Amsterdam", "San Jose",
+                                    "Limasol", "Edinburgh", "Prague" , "Cairo",
+                                    "Copenhagen", "Berlin" , "Vienna", "Tallinn"
+                                ];
+                $("#country").autocomplete({source:AvailableTags});
+                $("#city").autocomplete({source:Availablecities});
+            });
+        </script> 
+
+    </head>
+
+    <body>
+        
+        <center>
+            <h11><b>HMU Library </b></h11>
+            <!--Hmu logo-->
+            <div class="imgcontainer">
+                <img src="hmu-english-logo-transparent.png" alt="Avatar" class="avatar"
+                size = "100"
+                >
+            </div>
+            
+        <p class ="center" ><b>Διαπιστευτηρια</b> </p>
+                    <form action="/action_page.php" method="post">
+
+                        <div class="container">
+                                    
+                            <div class="container">
+                                <form action="/action_page.php">
+                                    <label for="usrname">Username</label>
+                                    <input type="text" id="usrname" name="usrname" required>
+
+                                     <label for="psw">Password</label>
+                                       <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                         
+                                </form>
+                            </div>
+                            <div id="message">
+                                <h3>Password must contain the following:</h3>
+                                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                                <p id="number" class="invalid">A <b>number</b></p>
+                                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                            </div>
+                                        
+                            <button type="submit">Login</button>
+                        
+                        </div>
+
+                    </form>
+                
+
+            <p>
+            </p>  <!-- this tag creates space between the two forms -->
+         
+            <p class ="center" ><b> Προσωπικα Στοιχεία</b> </p>
+                <form>
+                    <div class="container">
+                        
+                        <label for="fname">Ονομα</label>
+                        <input type="text" id="fname" name="fname" required>
+
+                        <label for="lname">Επωνυμο</label>
+                        <input type="text" id="lname" name="lname" required>
+
+                        <label for="studentID">Αριθμος φοιτικης</label>
+                        <input type="text" id="studentID" name="studentID" required>
+
+                        <label for="street">Οδος</label>
+                        <input type="text" id="street" name="street" required>
+
+                        <!--Autofill-->
+                        <div class = "ui-widget">
+                            <label for="city">Πολη</label>
+                            <input id="city" required>
+                        </div>
+                        
+                        <label for="PostalCode">ταχυδρομικος Κωδικας</label>
+                        <input type="text" id="PostalCode" name="PostalCode" required>
+
+                        <!-- autofill -->
+                        <div class= "ui-widget">
+                            <label for="country">Χωρα</label>
+                            <input  id="country" required>
+                        </div>
+                        <label for="MobilePhone">Κινητο Τηλεφωνο</label>
+                        <input type="text" id="MobilePhone" name="MobilePhone" required>
+
+                        <label for="bdate">Ημερομηνια Γεννησης </label>
+                        <input type="date" id="bdate" name="bdate" required>
+                    
+
+                        <label for="gender">gender </label>
+                        <div>
+                            <input type="radio" id="gender1" name="gender" required value = "Male">
+                            <label for = "gender1" >Male</label>
+                            <input type="radio" id="gender2" name="gender" required value = "female">
+                            <label for = "gender2" >female</label>
+                            <input type="radio" id="gender3" name="gender" required value = "non-binary">
+                            <label for = "gender3" >non-binary</label>
+                        </div>
+
+                        <input type="checkbox" id="check" name="check" value="check" >
+                        <label for="check"> αποδέχομαι τους όρους και προϋποθέσεις </label><br>
+                        <div>
+                            <button>Create Account</button>
+                        </div>
+                        
+                        
+                 </div>
+                    
+            </form>
+              
+            <form> 
+                <p>or Sign up using</p> 
+                <p></p>
+                <div class="container">
+                    <button onclick="location.href='https://accounts.google.com/signup/v2/webcreateaccount?hl=en&flowName=GlifWebSignIn&flowEntry=SignUp'" 
+                            type="button" >Google</button>
+                        
+                    <button onclick="location.href='https://gr.linkedin.com/'" type="button" >Linkdin</button>
+                </div>
+            </form>  
+                  
+        </center>
+    </body>
+</html>
